@@ -1,8 +1,8 @@
-#606 - Capstone Project 
+# 606 - Capstone Project 
 
-#Project title 
+# Project title 
 
-#Enhancing Information Integrity A Machine Learning and NLP Approach to Fake News Detection
+# Enhancing Information Integrity A Machine Learning and NLP Approach to Fake News Detection
 
-##Introduction
+## Introduction
 
