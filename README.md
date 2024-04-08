@@ -7,7 +7,9 @@
 <p align="justify">
 
 ## Introduction
-In today's digital age, the dissemination of information has become increasingly rapid and widespread, thanks to the internet and social media platforms. However, this convenience comes with its own set of challenges, chief among them being the proliferation of fake news. Fake news, often designed to deceive or manipulate readers, poses a significant threat to the integrity of information and the functioning of democratic societies.Addressing the issue of fake news requires a multi-faceted approach, combining technological innovations with human discernment. One promising avenue is the application of machine learning (ML) and natural language processing (NLP) techniques to detect and combat fake news effectively.
+<p align="justify">
+  
+In today's digital age, the dissemination of information has become increasingly rapid and widespread, thanks to the internet and social media platforms. However, this convenience comes with its own set of challenges, chief among them being the proliferation of fake news. Fake news, often designed to deceive or manipulate readers, poses a significant threat to the integrity of information and the functioning of democratic societies.Addressing the issue of fake news requires a multi-faceted approach, combining technological innovations with human discernment. One promising avenue is the application of machine learning (ML) and natural language processing (NLP) techniques to detect and combat fake news effectively. </p>
 
 Machine learning algorithms have the ability to analyze vast amounts of data and identify patterns that may indicate the authenticity or credibility of a piece of information. When coupled with NLP, which enables computers to understand and interpret human language, these algorithms become even more powerful tools for discerning the veracity of news articles and other forms of content.
 
