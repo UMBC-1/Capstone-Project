@@ -4,6 +4,8 @@
 
 # Enhancing Information Integrity A Machine Learning and NLP Approach to Fake News Detection
 
+<p align="justify">
+
 ## Introduction
 In today's digital age, the dissemination of information has become increasingly rapid and widespread, thanks to the internet and social media platforms. However, this convenience comes with its own set of challenges, chief among them being the proliferation of fake news. Fake news, often designed to deceive or manipulate readers, poses a significant threat to the integrity of information and the functioning of democratic societies.Addressing the issue of fake news requires a multi-faceted approach, combining technological innovations with human discernment. One promising avenue is the application of machine learning (ML) and natural language processing (NLP) techniques to detect and combat fake news effectively.
 
@@ -33,3 +35,6 @@ Sharma et al. provided an extensive survey of fake news detection methodologies,
 Jin et al. proposed a fake news detection framework based on Natural Language Processing (NLP) techniques. Their methodology involved extracting linguistic features from news articles and employing machine learning algorithms, particularly Logistic Regression with Count Vectorizer, to classify news content as either fake or real.
 
 These studies collectively contribute to advancing the field of fake news detection, offering insights into diverse methodologies and approaches aimed at mitigating the harmful effects of misinformation.
+
+
+</p>
