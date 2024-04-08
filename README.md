@@ -7,9 +7,8 @@
 <p align="justify">
 
 ## Introduction
-<p align="justify">
   
-In today's digital age, the dissemination of information has become increasingly rapid and widespread, thanks to the internet and social media platforms. However, this convenience comes with its own set of challenges, chief among them being the proliferation of fake news. Fake news, often designed to deceive or manipulate readers, poses a significant threat to the integrity of information and the functioning of democratic societies.Addressing the issue of fake news requires a multi-faceted approach, combining technological innovations with human discernment. One promising avenue is the application of machine learning (ML) and natural language processing (NLP) techniques to detect and combat fake news effectively. </p>
+In today's digital age, the dissemination of information has become increasingly rapid and widespread, thanks to the internet and social media platforms. However, this convenience comes with its own set of challenges, chief among them being the proliferation of fake news. Fake news, often designed to deceive or manipulate readers, poses a significant threat to the integrity of information and the functioning of democratic societies.Addressing the issue of fake news requires a multi-faceted approach, combining technological innovations with human discernment. One promising avenue is the application of machine learning (ML) and natural language processing (NLP) techniques to detect and combat fake news effectively. 
 
 Machine learning algorithms have the ability to analyze vast amounts of data and identify patterns that may indicate the authenticity or credibility of a piece of information. When coupled with NLP, which enables computers to understand and interpret human language, these algorithms become even more powerful tools for discerning the veracity of news articles and other forms of content.
 
@@ -38,5 +37,21 @@ Jin et al. proposed a fake news detection framework based on Natural Language Pr
 
 These studies collectively contribute to advancing the field of fake news detection, offering insights into diverse methodologies and approaches aimed at mitigating the harmful effects of misinformation.
 
+# Dataset Overview
 
-</p>
+The dataset comprises a collection of news articles available on Kaggle, accessible via the following link: Fake News Detection Dataset. It consists of two main files:
+
+1. Fake.csv:
+
+- File Size: 62.79MB
+* Number of Rows: 23,481
++ Number of Columns: 4
+
+2. True.csv:
+
+- File Size: 53.58MB
+* Number of Rows: 21,417
++ Number of Columns: 4
+
+These files contain a structured dataset of news articles, categorized into fake and true news. The data provides valuable resources for researchers and practitioners interested in studying and developing techniques for fake news detection.
+
