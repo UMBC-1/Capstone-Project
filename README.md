@@ -93,3 +93,79 @@ Model Selection: Based on the evaluation metrics, choose the model with the best
 7. Model Deployment
 
 Web Application Development: Develop a web application to deploy your chosen model. This allows users to interact with the model and obtain predictions based on new input data.
+
+# New Developments
+
+In the realm of text analysis, the integration of natural language processing (NLP) techniques during pre-processing is crucial for extracting meaningful insights from textual data. Techniques such as tokenization, stop word removal, and lemmatization or stemming are commonly employed to prepare the text for analysis. However, to delve deeper into the semantic relationships between words, leveraging advanced methods like Word2Vec embedding proves invaluable.
+
+Word2Vec enables the transformation of words into dense vectors, capturing semantic similarities and nuances in meaning. By representing words in a continuous vector space, Word2Vec facilitates tasks such as word similarity and analogy, enhancing the depth of analysis. Moreover, to address the computational challenges posed by large datasets, parallel processing techniques can be employed. By distributing the workload across multiple processors or cores, parallel processing significantly improves efficiency and reduces processing time.
+
+In addition to leveraging sophisticated techniques, providing a user-friendly interface is essential for facilitating access to the analysis tools. Streamlit, a powerful Python library, offers a convenient solution for creating interactive web applications with minimal effort. By integrating Streamlit into the analysis pipeline, users can effortlessly interact with the data, visualize results, and explore insights in real-time.
+
+In summary, the synergy between NLP techniques, Word2Vec embedding, parallel processing, and Streamlit interface not only enhances the efficiency of text analysis but also empowers users to uncover deeper insights from textual data with ease.
+
+# Data Preprocessing
+
+In the process of preparing our data for analysis, we began by merging two distinct datasets: one comprising real data and the other containing fake data. By consolidating these datasets, we aimed to create a comprehensive corpus that encompasses a diverse range of textual content.
+
+Subsequently, we introduced a target variable to each dataset to facilitate classification tasks. Specifically, we assigned a value of 1 to instances originating from the real data, signifying their authenticity, while instances sourced from the fake data were labeled with a value of 0.
+
+To ensure the integrity of our dataset and maintain data quality, we conducted thorough data cleaning procedures. This included identifying and addressing any null or missing values present within the combined dataset. By meticulously removing or imputing missing values, we fortified the robustness of our dataset, thereby enhancing the reliability and accuracy of subsequent analyses.
+
+# Step-by-step Code Analysis
+## Importing Packages
+
+```<python>
+import pandas as pd
+import numpy as np
+import seaborn as sns
+
+import nltk
+nltk.download('stopwords')
+
+from nltk.corpus import stopwords
+STOPWORDS = stopwords.words('english')
+```
+
+## Dataset Importing from Drive
+
+```<python>
+from google.colab import drive
+drive.mount('/content/drive')
+
+col = ["title", "text", "subject", "date"]
+fake_data = pd.read_csv('/content/capstone/Fake.csv', header=None, names=col, skiprows=1)
+real_data = pd.read_csv('/content/capstone/True.csv', header=None, names=col, skiprows=1)
+```
+## Display the Datasets
+
+```<python>
+fake_data.head()
+```
+![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/b3cf8e91-3b1b-411c-979c-9e19a3df6b32)
+
+```<python>
+fake_data.info()
+```
+![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/9091b7cc-bfbf-43f7-b644-5e89da59d476)
+
+```<python>
+real_data.head()
+```
+![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/b0b46150-7afc-4718-a299-23ce8016a209)
+
+```<python>
+real_data.info()
+```
+![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/0adc5446-080a-4abe-8d6b-28151a759a77)
+
+```<python>
+real_data['category'] = 1
+fake_data['category'] = 0
+```
+This code (real_data=1, fake_data=0) assigns labels (1=real, 0=fake) to categories in separate datasets (real_data and fake_data). This converts textual categories into numerical values for machine learning models to process the data.
+
+
+
+
+
