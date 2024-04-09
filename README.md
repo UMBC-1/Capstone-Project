@@ -38,7 +38,7 @@ These studies collectively contribute to advancing the field of fake news detect
 
 # Dataset Overview
 
-The dataset comprises a collection of news articles available on Kaggle, accessible via the following link: [Fake News Detection Dataset]. It consists of two main files:
+The dataset comprises a collection of news articles available on Kaggle, accessible via the following link: [Fake News Detection Dataset](https://www.kaggle.com/code/therealsampat/fake-news-detection/input). It consists of two main files:
 
 1. Fake.csv:
 
