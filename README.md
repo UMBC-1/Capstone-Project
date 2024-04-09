@@ -119,6 +119,11 @@ To ensure the integrity of our dataset and maintain data quality, we conducted t
 import pandas as pd
 import numpy as np
 import seaborn as sns
+import plotly.express as px
+import plotly.graph_objects as go
+import re
+from wordcloud import WordCloud, STOPWORDS
+import matplotlib.pyplot as plt
 
 import nltk
 nltk.download('stopwords')
@@ -135,6 +140,7 @@ This code block imports several libraries that are crucial for data science proj
 3. seaborn (sns): This library builds on top of matplotlib to create high-level visualizations. It simplifies the creation of informative and visually appealing charts and graphs, allowing you to effectively communicate insights from your data analysis.
 4. nltk: The Natural Language Toolkit (nltk) provides functionalities for working with text data. It offers tools for tokenization (splitting text into words), stemming (reducing words to their root form), sentiment analysis, and other NLP tasks.
 5. stopwords from nltk.corpus: This specifically imports the English stop words list from the NLTK corpus. Stop words are common words like "the," "a," or "an" that carry little meaning on their own. By removing them during text analysis, you can focus on the more informative content within your text data.
+6. plotly.express (px): This library provides a user-friendly way to create interactive visualizations in Python. It offers a wide range of chart types like scatter plots, bar charts, line charts, and more, with the ability to add interactivity for users to explore the data dynamically.
 
 By importing these libraries, you equip your data science project with the necessary tools for data handling, manipulation, visualization, and potentially working with textual data.
 
@@ -183,6 +189,7 @@ df.head()
 df.isnull().sum()
 ```
 ![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/234b182c-c285-4c2b-9567-15e2c9d8a58a)
+
 This concludes there are no null values.
 
 # Exploratory Data Analysis
@@ -196,6 +203,7 @@ plt.title('Frequency of subjects')
 plt.show()
 ```
 ![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/90d2aace-64a9-49f9-a918-02cc50d8c603)
+
 This bar graph depicts subject frequency, likely in a news article dataset. The x-axis lists subjects like "US News" and "Politics", with the y-axis showing their frequency (possibly number of articles). Red and white bars represent two categories (unclear from missing legend), with "US News" and "Politics" being the most frequent subjects overall.
 ```<python>
 plt.figure(figsize=(8, 6))
@@ -205,6 +213,7 @@ plt.ylabel('')
 plt.show()
 ```
 ![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/3826b1dd-339e-4bbe-948a-99f355ed83c1)
+
 This pie chart likely depicts the distribution of real and fake data in your dataset. With blue labeled as 52.3% and orange at 47.7%, the data seems fairly balanced between real and fake categories. 
 ```<python>
 # Convert 'date' column to datetime
@@ -236,5 +245,151 @@ Converting the date to a timeline format is crucial for creating the desired vis
 *Stacked Area Chart: The code uses timeline_data.plot(kind='area',stacked=True) to create a stacked area chart. This chart effectively portrays the volume of real and fake news articles (represented by areas) throughout the months. Without the timeline conversion, such an informative visualization wouldn't be possible.
 
 In essence, converting the date to a timeline allows you to explore and visualize temporal patterns in your data, revealing trends and potential relationships between real/fake news distribution and time.
+```<python>
+plt.figure(figsize=(15, 6))
+timeline_data.plot(kind='area',stacked=True, color=['lightpink','lightblue'])
+plt.title('Timeline of Fake and Real News Articles')
+plt.xlabel('Month')
+plt.ylabel('Number of Articles')
+plt.legend(title='Fake or Real')
+plt.show()
+```
+![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/3b5c3111-4e52-4824-b83d-e422452ea081)
+
+This time series plot visualizes the distribution of fake (light pink) and real (light blue) news articles over time (months). The stacked area chart shows the cumulative number of articles in each category, with color intensity potentially indicating higher volumes of fake news articles compared to real news articles throughout the displayed timeframe.
+```<python>
+df['color'] = df['category'].map({0: 'salmon ', 1: 'lightblue'})
+
+df['text_length'] = df['text'].apply(lambda x: len(x))
+
+fig_histogram = px.histogram(df, x='text_length', color='category',
+                             color_discrete_map={0: 'lightsalmon', 1: 'lightblue'},
+                             marginal='box', # Displays a box plot for additional insight
+                             title='Distribution of Article Lengths by Category')
+fig_histogram.show()
+```
+![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/80763949-3eb1-4156-b5c6-00169bd51335)
+
+## Text Processing
+```<python>
+fake = " ".join(article for article in fake_data["text"])
+
+def preprocess_text(text):
+    text = text.lower()
+    text = re.sub(r'[^\w\s]', '', text)  # Remove punctuation
+    text = re.sub(r'\d+', '', text)      # Remove digits
+    return text
+
+fake_cleaned = preprocess_text(fake)
+
+fake_cleaned[:300]
+```
+This code snippet prepares text data from your "fake_data" for further analysis, likely related to creating a word cloud of fake news articles. Here's a breakdown:
+
+1. Combining Text:
+-fake = " ".join(article for article in fake_data["text"]): This line merges all the text content from the "text" column in your "fake_data" DataFrame into a single string named "fake". This combines the text from all fake news articles.
+
+2. Preprocessing Function:
+-def preprocess_text(text):: This defines a function named preprocess_text that takes a text string as input.
+Text Cleaning Steps:
+-text = text.lower(): This line converts all characters in the text to lowercase for consistency.
+text = re.sub(r'[^\w\s]', '', text): This uses regular expressions (re.sub) to remove all characters except alphanumeric characters (\w) and whitespace (\s). This eliminates punctuation marks from the text.
+-text = re.sub(r'\d+', '', text): Another regular expression removes digits (\d+) from the text, focusing on the words themselves.
+
+3. Cleaning Applied:
+-fake_cleaned = preprocess_text(fake): This line applies the preprocess_text function to the combined text string "fake", cleaning it by removing punctuation and digits.
+
+5. Output:
+-fake_cleaned[:300]: This line displays the first 300 characters of the cleaned text "fake_cleaned", allowing you to see a sample of the processed text.
+
+Overall, this code prepares the text data from fake news articles for further analysis by converting it to lowercase, removing punctuation and digits, and potentially feeding it into a word cloud creation process to visualize frequently used words within the fake news content.
+
+Output: 
+'donald trump just couldn t wish all americans a happy new year and leave it at that instead he had to give a shout out to his enemies haters and  the very dishonest fake news media  the former reality show star had just one job to do and he couldn t do it as our country rapidly grows stronger and sm'
+```<python>
+wordcloud_fake = WordCloud(stopwords=STOPWORDS, background_color="white", max_words=500, width=800, height=400).generate(fake_cleaned)
+
+fig = go.Figure(go.Image(z=wordcloud_fake))
+fig.update_layout(title_text='Word Cloud for Fake News Articles', title_x=0.5)
+fig.update_xaxes(visible=False)
+fig.update_yaxes(visible=False)
+fig.show()
+```
+![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/7de985a9-8f9b-4d52-9c46-431966a89303)
+```<python>
+real = " ".join(article for article in real_data["text"])
+
+def preprocess_text(text):
+    text = text.lower()
+    text = re.sub(r'[^\w\s]', '', text)  # Remove punctuation
+    text = re.sub(r'\d+', '', text)      # Remove digits
+    return text
+
+real_cleaned = preprocess_text(real)
+
+real_cleaned[:300]
+```
+Output: 
+'washington reuters  the head of a conservative republican faction in the us congress who voted this month for a huge expansion of the national debt to pay for tax cuts called himself a fiscal conservative on sunday and urged budget restraint in  in keeping with a sharp pivot under way among republic'
+```<python>
+wordcloud_real = WordCloud(stopwords=STOPWORDS, background_color="white", max_words=500, width=800, height=400).generate(real_cleaned)
+
+fig = go.Figure(go.Image(z=wordcloud_real))
+fig.update_layout(title_text='Word Cloud for Real News Articles', title_x=0.5)
+fig.update_xaxes(visible=False)
+fig.update_yaxes(visible=False)
+fig.show()
+```
+![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/a24ba6aa-1f17-43cb-9bbd-57a3285dcf75)
+```<python>
+# Create a figure with two subplots
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 8))
+
+# Plotting word count distribution for real text
+real_word_count = df[df['category'] == 1]['text'].str.split().apply(len)
+ax1.hist(real_word_count, color='blue', bins=20)
+ax1.set_title('Real Text Word Count Distribution')
+
+# Plotting word count distribution for fake text
+fake_word_count = df[df['category'] == 0]['text'].str.split().apply(len)
+ax2.hist(fake_word_count, color='orange', bins=20)
+ax2.set_title('Fake Text Word Count Distribution')
+
+# Adding labels and titles
+ax1.set_xlabel('Word Count')
+ax1.set_ylabel('Frequency')
+ax2.set_xlabel('Word Count')
+ax2.set_ylabel('Frequency')
+fig.suptitle('Word Count Distribution for Real and Fake Text')
+
+# Show the plot
+plt.show()
+```
+![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/a950e61b-02c6-4631-b4dc-c3bb4313313c)
+```<python>
+# Create a figure with two subplots
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 8))
+
+# Plotting word count distribution for real text
+real_char_count = df[df['category'] == 1]['text'].str.len()
+ax1.hist(real_char_count, color='blue', bins=20)
+ax1.set_title('Real Text character Count Distribution')
+
+# Plotting word count distribution for fake text
+fake_word_count = df[df['category'] == 0]['text'].str.len()
+ax2.hist(fake_word_count, color='orange', bins=20)
+ax2.set_title('Fake Text character Count Distribution')
+
+# Adding labels and titles
+ax1.set_xlabel('Count')
+ax1.set_ylabel('Frequency')
+ax2.set_xlabel('Count')
+ax2.set_ylabel('Frequency')
+fig.suptitle('Character Count Distribution for Real and Fake Text')
+
+# Show the plot
+plt.show()
+```
+![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/371082d6-6eb5-4c6a-bf7c-e96e157f8f4e)
 
 
