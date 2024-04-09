@@ -127,6 +127,17 @@ from nltk.corpus import stopwords
 STOPWORDS = stopwords.words('english')
 ```
 
+Importing Essential Libraries for Data Science Tasks
+
+This code block imports several libraries that are crucial for data science projects:
+1. pandas (pd): This library is a workhorse for data manipulation and analysis. It provides powerful data structures like DataFrames and Series, along with functions for data cleaning, transformation, and exploration.
+2. numpy (np): This library offers efficient tools for numerical computations. It's essential for performing array-based operations, linear algebra calculations, and other mathematical tasks commonly encountered in data science.
+3. seaborn (sns): This library builds on top of matplotlib to create high-level visualizations. It simplifies the creation of informative and visually appealing charts and graphs, allowing you to effectively communicate insights from your data analysis.
+4. nltk: The Natural Language Toolkit (nltk) provides functionalities for working with text data. It offers tools for tokenization (splitting text into words), stemming (reducing words to their root form), sentiment analysis, and other NLP tasks.
+5. stopwords from nltk.corpus: This specifically imports the English stop words list from the NLTK corpus. Stop words are common words like "the," "a," or "an" that carry little meaning on their own. By removing them during text analysis, you can focus on the more informative content within your text data.
+
+By importing these libraries, you equip your data science project with the necessary tools for data handling, manipulation, visualization, and potentially working with textual data.
+
 ## Dataset Importing from Drive
 
 ```<python>
@@ -143,29 +154,87 @@ real_data = pd.read_csv('/content/capstone/True.csv', header=None, names=col, sk
 fake_data.head()
 ```
 ![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/b3cf8e91-3b1b-411c-979c-9e19a3df6b32)
-
 ```<python>
 fake_data.info()
 ```
 ![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/9091b7cc-bfbf-43f7-b644-5e89da59d476)
-
 ```<python>
 real_data.head()
 ```
 ![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/b0b46150-7afc-4718-a299-23ce8016a209)
-
 ```<python>
 real_data.info()
 ```
 ![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/0adc5446-080a-4abe-8d6b-28151a759a77)
-
 ```<python>
 real_data['category'] = 1
 fake_data['category'] = 0
 ```
 This code (real_data=1, fake_data=0) assigns labels (1=real, 0=fake) to categories in separate datasets (real_data and fake_data). This converts textual categories into numerical values for machine learning models to process the data.
+```<python>
+df = pd.DataFrame(pd.concat([fake_data,real_data]))
+```
+This line of code merges two DataFrames, fake_data and real_data, into a new DataFrame named df, likely stacking them vertically to combine their rows.
+```<python>
+df.head()
+```
+![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/f710876f-6119-4986-8234-f3d55a2cddf5)
+```<python>
+df.isnull().sum()
+```
+![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/234b182c-c285-4c2b-9567-15e2c9d8a58a)
+This concludes there are no null values.
 
+# Exploratory Data Analysis
+## Step-by-step Code Analysis
+```<python>
+from matplotlib import pyplot as plt
+df['subject'].value_counts().plot(kind='barh', color='red')
+plt.xlabel('Subject')
+plt.ylabel('Frequency')
+plt.title('Frequency of subjects')
+plt.show()
+```
+![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/90d2aace-64a9-49f9-a918-02cc50d8c603)
+This bar graph depicts subject frequency, likely in a news article dataset. The x-axis lists subjects like "US News" and "Politics", with the y-axis showing their frequency (possibly number of articles). Red and white bars represent two categories (unclear from missing legend), with "US News" and "Politics" being the most frequent subjects overall.
+```<python>
+plt.figure(figsize=(8, 6))
+df['category'].value_counts().plot(kind='pie', autopct='%1.1f%%')
+plt.title('Pie Chart of Categories')
+plt.ylabel('')
+plt.show()
+```
+![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/3826b1dd-339e-4bbe-948a-99f355ed83c1)
+This pie chart likely depicts the distribution of real and fake data in your dataset. With blue labeled as 52.3% and orange at 47.7%, the data seems fairly balanced between real and fake categories. 
+```<python>
+# Convert 'date' column to datetime
+df['date'] = pd.to_datetime(df['date'],errors='coerce')
 
+timeline_data = df.groupby([df['date'].dt.to_period('M'), 'category']).size().unstack().fillna(0)
+```
+This code snippet performs several key tasks to create a visualization of fake and real news articles over time:
 
+1. Converting 'date' to Datetime:
+
+-df['date'] = pd.to_datetime(df['date'],errors='coerce'): This line converts the 'date' column in your DataFrame df into a proper datetime format using the pandas.to_datetime function. The errors='coerce' argument ensures that any non-convertible dates are set to NaT (Not a Time) instead of raising errors.
+
+2. Creating the Timeline Data:
+
+-timeline_data = df.groupby([df['date'].dt.to_period('M'), 'category']).size().unstack().fillna(0): This part creates a new DataFrame named timeline_data that summarizes the data by month and category:
+  -df.groupby([df['date'].dt.to_period('M'), 'category']): This groups the data in df by two factors: the month ('M') extracted from the datetime column         
+  (df['date'].dt.to_period('M')) and the category ('category').
+  -size(): This calculates the count of entries within each group, essentially giving you the number of real/fake news articles for each month.
+  -unstack(): This transforms the grouped data into a DataFrame with months as rows and categories ('category') as columns. The resulting DataFrame shows the         monthly counts of real and fake news articles.
+  -fillna(0): This fills any missing values (months with no articles) in the DataFrame with 0, ensuring a complete timeline for visualization.
+
+Importance of Timeline Conversion:
+
+Converting the date to a timeline format is crucial for creating the desired visualization:
+
+-Time-based Analysis: By converting the date to a monthly period, you can analyze and visualize how the number of real and fake news articles changes over time. Looking at raw dates wouldn't provide a clear picture of these trends.
+
+*Stacked Area Chart: The code uses timeline_data.plot(kind='area',stacked=True) to create a stacked area chart. This chart effectively portrays the volume of real and fake news articles (represented by areas) throughout the months. Without the timeline conversion, such an informative visualization wouldn't be possible.
+
+In essence, converting the date to a timeline allows you to explore and visualize temporal patterns in your data, revealing trends and potential relationships between real/fake news distribution and time.
 
 
