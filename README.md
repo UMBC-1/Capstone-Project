@@ -54,3 +54,42 @@ The dataset comprises a collection of news articles available on Kaggle, accessi
 
 These files contain a structured dataset of news articles, categorized into fake and true news. The data provides valuable resources for researchers and practitioners interested in studying and developing techniques for fake news detection.
 
+# Workflow of the Project
+![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/a9d22fd4-9977-40c7-a853-02475ee9a13e)
+
+1. Data Acquisition and Understanding
+
+Dataset Selection: Identify the data source relevant to your project's goals. This data can come from various sources like internal databases, web scraping, APIs, or public datasets.
+Data Understanding: Explore and analyze the initial data to grasp its characteristics. This includes data types, presence of missing values, outliers, and potential inconsistencies.
+
+2. Data Cleaning and Preprocessing
+
+Missing Value Handling: Address missing data points using techniques like mean/median imputation, deletion, or carrying forward/backward values based on context.
+Outlier Treatment: Identify and handle outliers that might skew your analysis. This may involve capping outliers to a specific range, winsorizing, or removal depending on the situation.
+Data Cleaning: Address inconsistencies like typos, formatting errors, or special characters to ensure data quality.
+Normalization/Scaling: Normalize or scale features (columns) in your data to a common range to prevent specific features from dominating the model training process.
+Dimensionality Reduction (Optional): If you have a high number of features, consider dimensionality reduction techniques like Principal Component Analysis (PCA) to reduce the feature space while retaining maximum information.
+
+3. Feature Engineering and NLP Tasks
+
+Feature Engineering: Create new features from existing ones that might be more informative for your models. This can involve feature creation, interaction terms, or binning categorical features.
+Natural Language Processing (NLP Tasks): If your data is text-based, perform NLP tasks like tokenization (splitting text into words), stemming (reducing words to their root form), or lemmatization (converting words to their dictionary form) to prepare the text data for modeling.
+
+4. Feature Extraction
+
+Select a subset of relevant features from your data that will be used by the machine learning models for training. Feature selection techniques like correlation analysis, chi-square tests, or feature importance scores can help identify the most informative features.
+
+5. Model Training and Selection
+
+Data Splitting: Divide your cleaned and preprocessed data into two sets: a training set (used to train the models) and a testing set (used to evaluate the models' performance on unseen data).
+Algorithm Selection: Choose one or more machine learning algorithms suitable for your problem type. The flowchart provides examples like Logistic Regression (classification problems), Support Vector Machine (classification or regression), Decision Tree (classification or regression), and Random Forest (classification or regression).
+Model Training: Train each chosen model on the training set. The model learns patterns and relationships within the data to make predictions.
+
+6. Model Evaluation
+
+Evaluation Metrics: Evaluate the performance of the trained models on the testing set using metrics like accuracy, precision, recall, F1 score, or other relevant metrics depending on your problem (classification vs. regression). This helps you understand how well the model generalizes to unseen data.
+Model Selection: Based on the evaluation metrics, choose the model with the best performance for your specific needs.
+
+7. Model Deployment
+
+Web Application Development: Develop a web application to deploy your chosen model. This allows users to interact with the model and obtain predictions based on new input data.
