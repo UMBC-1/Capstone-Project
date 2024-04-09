@@ -477,6 +477,7 @@ This code snippet analyzes bigrams (2-word phrases) in fake and real news articl
 Overall, this code helps you identify potential patterns in how language is used within fake and real news articles by analyzing the most frequent bigrams (2-word phrases) in their titles.
 
 Output:
+
 ![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/219da0e9-86c6-4d65-b8bb-2c41213c8b80)
 
 Upon analyzing bi-grams in news titles, distinct patterns emerge between fake and true news datasets.
@@ -520,7 +521,17 @@ The values are created using list comprehension to iterate through the fake_news
 
 By analyzing both bigrams (2-word phrases) and trigrams (3-word phrases), you can gain a deeper understanding of the characteristic language patterns used in different categories of news articles (fake vs. real). This can be helpful in developing algorithms for detecting fake news or understanding the stylistic choices used in these types of content.
 
+Output:
 
+![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/6cfeb7c9-7422-48b5-ba87-5b19a68e2cd9)
+
+-The occurrence of phrases like 'Boiler Room EP' and 'Black Lives Matter' within fake news tri-grams suggests a propensity towards sensationalism or subjective interpretation of events. These phrases, often utilized to evoke strong emotions or garner attention, indicate a tendency within fabricated narratives to prioritize dramatic or controversial elements over factual accuracy.
+
+-In contrast, tri-grams found in true news articles containing phrases like 'White House says' and 'Trump says he' reflect a more objective approach to reporting, focusing on statements made by credible sources. By attributing information to authoritative figures or institutions, true news sources aim to provide readers with reliable and verifiable information, thereby upholding journalistic integrity.
+
+-Tri-grams within fake news articles may include phrases that are intentionally misleading or crafted to deceive, as exemplified by the inclusion of 'To Vote For'. Such deceptive practices aim to manipulate readers' perceptions or influence their behavior, highlighting the deceptive nature inherent in fabricated news narratives.
+
+-Conversely, tri-grams present in true news articles often incorporate phrases that offer context or factual information, as illustrated by 'Factbox: Trump on'. By providing readers with additional background or explanatory details, true news sources strive to enhance understanding and clarity surrounding complex issues or events, fostering informed discourse and critical thinking among readers.
 
 
 
