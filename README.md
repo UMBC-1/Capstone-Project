@@ -4,7 +4,6 @@
 
 # Enhancing Information Integrity A Machine Learning and NLP Approach to Fake News Detection
 
-<p align="justify">
 
 ## Introduction
   
@@ -39,7 +38,7 @@ These studies collectively contribute to advancing the field of fake news detect
 
 # Dataset Overview
 
-The dataset comprises a collection of news articles available on Kaggle, accessible via the following link: Fake News Detection Dataset. It consists of two main files:
+The dataset comprises a collection of news articles available on Kaggle, accessible via the following link: [Fake News Detection Dataset]. It consists of two main files:
 
 1. Fake.csv:
 
