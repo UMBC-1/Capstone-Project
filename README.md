@@ -225,24 +225,24 @@ This code snippet performs several key tasks to create a visualization of fake a
 
 1. Converting 'date' to Datetime:
 
--df['date'] = pd.to_datetime(df['date'],errors='coerce'): This line converts the 'date' column in your DataFrame df into a proper datetime format using the pandas.to_datetime function. The errors='coerce' argument ensures that any non-convertible dates are set to NaT (Not a Time) instead of raising errors.
+- df['date'] = pd.to_datetime(df['date'],errors='coerce'): This line converts the 'date' column in your DataFrame df into a proper datetime format using the pandas.to_datetime function. The errors='coerce' argument ensures that any non-convertible dates are set to NaT (Not a Time) instead of raising errors.
 
 2. Creating the Timeline Data:
 
--timeline_data = df.groupby([df['date'].dt.to_period('M'), 'category']).size().unstack().fillna(0): This part creates a new DataFrame named timeline_data that summarizes the data by month and category:
-  -df.groupby([df['date'].dt.to_period('M'), 'category']): This groups the data in df by two factors: the month ('M') extracted from the datetime column         
+- timeline_data = df.groupby([df['date'].dt.to_period('M'), 'category']).size().unstack().fillna(0): This part creates a new DataFrame named timeline_data that summarizes the data by month and category:
+  - df.groupby([df['date'].dt.to_period('M'), 'category']): This groups the data in df by two factors: the month ('M') extracted from the datetime column         
   (df['date'].dt.to_period('M')) and the category ('category').
-  -size(): This calculates the count of entries within each group, essentially giving you the number of real/fake news articles for each month.
-  -unstack(): This transforms the grouped data into a DataFrame with months as rows and categories ('category') as columns. The resulting DataFrame shows the         monthly counts of real and fake news articles.
-  -fillna(0): This fills any missing values (months with no articles) in the DataFrame with 0, ensuring a complete timeline for visualization.
+  - size(): This calculates the count of entries within each group, essentially giving you the number of real/fake news articles for each month.
+  - unstack(): This transforms the grouped data into a DataFrame with months as rows and categories ('category') as columns. The resulting DataFrame shows the         monthly counts of real and fake news articles.
+  - fillna(0): This fills any missing values (months with no articles) in the DataFrame with 0, ensuring a complete timeline for visualization.
 
 Importance of Timeline Conversion:
 
 Converting the date to a timeline format is crucial for creating the desired visualization:
 
--Time-based Analysis: By converting the date to a monthly period, you can analyze and visualize how the number of real and fake news articles changes over time. Looking at raw dates wouldn't provide a clear picture of these trends.
+- Time-based Analysis: By converting the date to a monthly period, you can analyze and visualize how the number of real and fake news articles changes over time. Looking at raw dates wouldn't provide a clear picture of these trends.
 
-*Stacked Area Chart: The code uses timeline_data.plot(kind='area',stacked=True) to create a stacked area chart. This chart effectively portrays the volume of real and fake news articles (represented by areas) throughout the months. Without the timeline conversion, such an informative visualization wouldn't be possible.
+* Stacked Area Chart: The code uses timeline_data.plot(kind='area',stacked=True) to create a stacked area chart. This chart effectively portrays the volume of real and fake news articles (represented by areas) throughout the months. Without the timeline conversion, such an informative visualization wouldn't be possible.
 
 In essence, converting the date to a timeline allows you to explore and visualize temporal patterns in your data, revealing trends and potential relationships between real/fake news distribution and time.
 ```<python>
@@ -287,20 +287,20 @@ fake_cleaned[:300]
 This code snippet prepares text data from your "fake_data" for further analysis, likely related to creating a word cloud of fake news articles. Here's a breakdown:
 
 1. Combining Text:
--fake = " ".join(article for article in fake_data["text"]): This line merges all the text content from the "text" column in your "fake_data" DataFrame into a single string named "fake". This combines the text from all fake news articles.
+- fake = " ".join(article for article in fake_data["text"]): This line merges all the text content from the "text" column in your "fake_data" DataFrame into a single string named "fake". This combines the text from all fake news articles.
 
 2. Preprocessing Function:
--def preprocess_text(text):: This defines a function named preprocess_text that takes a text string as input.
+- def preprocess_text(text):: This defines a function named preprocess_text that takes a text string as input.
 Text Cleaning Steps:
--text = text.lower(): This line converts all characters in the text to lowercase for consistency.
+- text = text.lower(): This line converts all characters in the text to lowercase for consistency.
 text = re.sub(r'[^\w\s]', '', text): This uses regular expressions (re.sub) to remove all characters except alphanumeric characters (\w) and whitespace (\s). This eliminates punctuation marks from the text.
--text = re.sub(r'\d+', '', text): Another regular expression removes digits (\d+) from the text, focusing on the words themselves.
+- text = re.sub(r'\d+', '', text): Another regular expression removes digits (\d+) from the text, focusing on the words themselves.
 
 3. Cleaning Applied:
--fake_cleaned = preprocess_text(fake): This line applies the preprocess_text function to the combined text string "fake", cleaning it by removing punctuation and digits.
+- fake_cleaned = preprocess_text(fake): This line applies the preprocess_text function to the combined text string "fake", cleaning it by removing punctuation and digits.
 
 5. Output:
--fake_cleaned[:300]: This line displays the first 300 characters of the cleaned text "fake_cleaned", allowing you to see a sample of the processed text.
+- fake_cleaned[:300]: This line displays the first 300 characters of the cleaned text "fake_cleaned", allowing you to see a sample of the processed text.
 
 Overall, this code prepares the text data from fake news articles for further analysis by converting it to lowercase, removing punctuation and digits, and potentially feeding it into a word cloud creation process to visualize frequently used words within the fake news content.
 
@@ -435,44 +435,44 @@ This code snippet analyzes bigrams (2-word phrases) in fake and real news articl
 
 1. Importing Libraries:
 
--from nltk.util import ngrams: This imports the ngrams function from the nltk.util module, which helps generate sequences of N words (N-grams) from a text corpus.
-*from collections import Counter: This imports the Counter class from the collections module, which is used to create a dictionary-like object that keeps track of how often each element appears in an iterable.
+- from nltk.util import ngrams: This imports the ngrams function from the nltk.util module, which helps generate sequences of N words (N-grams) from a text corpus.
+* from collections import Counter: This imports the Counter class from the collections module, which is used to create a dictionary-like object that keeps track of how often each element appears in an iterable.
 
 2. get_ngrams Function:
 
--def get_ngrams(corpus, ngram_range, top_n):: This defines a function named get_ngrams that takes three arguments:
+- def get_ngrams(corpus, ngram_range, top_n):: This defines a function named get_ngrams that takes three arguments:
 
-  -corpus: This is the text data you want to analyze, likely a list of sentences or titles in your case.
-  -ngram_range: This is a tuple specifying the range of N-gram lengths to consider (e.g., (2, 2) for bigrams).
-  -top_n: This is an integer representing the number of most frequent N-grams to return.
--tokenized_corpus = [word for sentence in corpus for word in sentence.split()]: This line iterates through the corpus, tokenizes each sentence (splitting it into words), and creates a flat list named tokenized_corpus that contains all the individual words.
+  - corpus: This is the text data you want to analyze, likely a list of sentences or titles in your case.
+  - ngram_range: This is a tuple specifying the range of N-gram lengths to consider (e.g., (2, 2) for bigrams).
+  - top_n: This is an integer representing the number of most frequent N-grams to return.
+- tokenized_corpus = [word for sentence in corpus for word in sentence.split()]: This line iterates through the corpus, tokenizes each sentence (splitting it into words), and creates a flat list named tokenized_corpus that contains all the individual words.
 
--n_grams = ngrams(tokenized_corpus, ngram_range): This line uses the ngrams function from NLTK to generate N-grams within the specified range (ngram_range) from the tokenized text in tokenized_corpus. In this case, it will generate bigrams (2-word sequences).
+- n_grams = ngrams(tokenized_corpus, ngram_range): This line uses the ngrams function from NLTK to generate N-grams within the specified range (ngram_range) from the tokenized text in tokenized_corpus. In this case, it will generate bigrams (2-word sequences).
 
--ngram_freq = Counter(n_grams): This line uses the Counter class to create a dictionary-like object ngram_freq that keeps track of how many times each bigram appears in the corpus.
+- ngram_freq = Counter(n_grams): This line uses the Counter class to create a dictionary-like object ngram_freq that keeps track of how many times each bigram appears in the corpus.
 
--top_ngrams = ngram_freq.most_common(top_n): This line uses the most_common method of ngram_freq to get the top_n (e.g., top 5) most frequent bigrams and their counts. It returns a list of tuples, where each tuple contains a bigram and its frequency.
+- top_ngrams = ngram_freq.most_common(top_n): This line uses the most_common method of ngram_freq to get the top_n (e.g., top 5) most frequent bigrams and their counts. It returns a list of tuples, where each tuple contains a bigram and its frequency.
 
--return top_ngrams: This line returns the list of top N-grams (top_ngrams).
+- return top_ngrams: This line returns the list of top N-grams (top_ngrams).
 
 3. Analyzing Fake and Real News Titles:
 
--fake_news_bigrams = get_ngrams(fake_data['title'], 2, 5): This line calls the get_ngrams function to find the top 5 most frequent bigrams from the titles in the 'title' column of the fake_data DataFrame.
+- fake_news_bigrams = get_ngrams(fake_data['title'], 2, 5): This line calls the get_ngrams function to find the top 5 most frequent bigrams from the titles in the 'title' column of the fake_data DataFrame.
 
--true_news_bigrams = get_ngrams(real_data['title'], 2, 5): This line does the same for the titles in the 'title' column of the real_data DataFrame, identifying the top 5 most frequent bigrams in real news titles.
+- true_news_bigrams = get_ngrams(real_data['title'], 2, 5): This line does the same for the titles in the 'title' column of the real_data DataFrame, identifying the top 5 most frequent bigrams in real news titles.
 
 4. Creating DataFrame:
 
--This section creates a DataFrame named bigrams_df to present the results in a tabular format.
+- This section creates a DataFrame named bigrams_df to present the results in a tabular format.
   -The DataFrame has two columns:
 
-  -'Fake News Bi-Grams': This column lists the top 5 bigrams from fake news titles, formatted with each word and its frequency in parentheses (e.g., "breaking news (10)").
+  - 'Fake News Bi-Grams': This column lists the top 5 bigrams from fake news titles, formatted with each word and its frequency in parentheses (e.g., "breaking news (10)").
     -'True News Bi-Grams': This column lists the top 5 bigrams from real news titles, formatted similarly.
-  -The values in each cell are created using list comprehension to iterate through the fake_news_bigrams and true_news_bigrams lists and format the bigrams with their counts.
+  - The values in each cell are created using list comprehension to iterate through the fake_news_bigrams and true_news_bigrams lists and format the bigrams with their counts.
 
 5. Displaying Results:
 
--bigrams_df: This line displays the final DataFrame bigrams_df, which allows you to compare the most frequent bigrams used in fake and real news titles.
+- bigrams_df: This line displays the final DataFrame bigrams_df, which allows you to compare the most frequent bigrams used in fake and real news titles.
 
 Overall, this code helps you identify potential patterns in how language is used within fake and real news articles by analyzing the most frequent bigrams (2-word phrases) in their titles.
 
@@ -501,23 +501,23 @@ trigrams_df
 ```
 This code builds upon the previous analysis and focuses on trigrams, which are 3-word phrases, in your fake and real news article titles. Here's a breakdown of what it does:
 
--Finding Top Trigrams:
+- Finding Top Trigrams:
 
-  -fake_news_trigrams = get_ngrams(fake_data['title'], 3, 5): This line calls the get_ngrams function you defined earlier. Here, it analyzes the titles in the 'title' column of fake_data, searching for the top 5 most frequent trigrams (3-word sequences).
+  - fake_news_trigrams = get_ngrams(fake_data['title'], 3, 5): This line calls the get_ngrams function you defined earlier. Here, it analyzes the titles in the 'title' column of fake_data, searching for the top 5 most frequent trigrams (3-word sequences).
   -true_news_trigrams = get_ngrams(real_data['title'], 3, 5): This line does the same for the titles in real_data, identifying the top 5 most frequent trigrams used in real news titles.
   
--Creating Trigram DataFrame:
+- Creating Trigram DataFrame:
 
--This section creates a DataFrame named trigrams_df to present the trigram analysis results:
+- This section creates a DataFrame named trigrams_df to present the trigram analysis results:
   -Similar to the bigram DataFrame, it has two columns:
 
-  -'Fake News Tri-Grams': This column lists the top 5 trigrams from fake news titles, formatted with each word and its frequency in parentheses (e.g., "breaking news event (8)").
-  -'True News Tri-Grams': This column lists the top 5 trigrams from real news titles, formatted similarly.
+  - 'Fake News Tri-Grams': This column lists the top 5 trigrams from fake news titles, formatted with each word and its frequency in parentheses (e.g., "breaking news event (8)").
+  - 'True News Tri-Grams': This column lists the top 5 trigrams from real news titles, formatted similarly.
 The values are created using list comprehension to iterate through the fake_news_trigrams and true_news_trigrams lists and format the trigrams with their counts.
 
--Displaying Results:
+- Displaying Results:
 
-  -trigrams_df: This line displays the final DataFrame trigrams_df, allowing you to compare the most frequent 3-word phrases used in the titles of fake and real news articles.
+  - trigrams_df: This line displays the final DataFrame trigrams_df, allowing you to compare the most frequent 3-word phrases used in the titles of fake and real news articles.
 
 By analyzing both bigrams (2-word phrases) and trigrams (3-word phrases), you can gain a deeper understanding of the characteristic language patterns used in different categories of news articles (fake vs. real). This can be helpful in developing algorithms for detecting fake news or understanding the stylistic choices used in these types of content.
 
@@ -525,13 +525,13 @@ Output:
 
 ![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/6cfeb7c9-7422-48b5-ba87-5b19a68e2cd9)
 
--The occurrence of phrases like 'Boiler Room EP' and 'Black Lives Matter' within fake news tri-grams suggests a propensity towards sensationalism or subjective interpretation of events. These phrases, often utilized to evoke strong emotions or garner attention, indicate a tendency within fabricated narratives to prioritize dramatic or controversial elements over factual accuracy.
+- The occurrence of phrases like 'Boiler Room EP' and 'Black Lives Matter' within fake news tri-grams suggests a propensity towards sensationalism or subjective interpretation of events. These phrases, often utilized to evoke strong emotions or garner attention, indicate a tendency within fabricated narratives to prioritize dramatic or controversial elements over factual accuracy.
 
--In contrast, tri-grams found in true news articles containing phrases like 'White House says' and 'Trump says he' reflect a more objective approach to reporting, focusing on statements made by credible sources. By attributing information to authoritative figures or institutions, true news sources aim to provide readers with reliable and verifiable information, thereby upholding journalistic integrity.
+- In contrast, tri-grams found in true news articles containing phrases like 'White House says' and 'Trump says he' reflect a more objective approach to reporting, focusing on statements made by credible sources. By attributing information to authoritative figures or institutions, true news sources aim to provide readers with reliable and verifiable information, thereby upholding journalistic integrity.
 
--Tri-grams within fake news articles may include phrases that are intentionally misleading or crafted to deceive, as exemplified by the inclusion of 'To Vote For'. Such deceptive practices aim to manipulate readers' perceptions or influence their behavior, highlighting the deceptive nature inherent in fabricated news narratives.
+- Tri-grams within fake news articles may include phrases that are intentionally misleading or crafted to deceive, as exemplified by the inclusion of 'To Vote For'. Such deceptive practices aim to manipulate readers' perceptions or influence their behavior, highlighting the deceptive nature inherent in fabricated news narratives.
 
--Conversely, tri-grams present in true news articles often incorporate phrases that offer context or factual information, as illustrated by 'Factbox: Trump on'. By providing readers with additional background or explanatory details, true news sources strive to enhance understanding and clarity surrounding complex issues or events, fostering informed discourse and critical thinking among readers.
+- Conversely, tri-grams present in true news articles often incorporate phrases that offer context or factual information, as illustrated by 'Factbox: Trump on'. By providing readers with additional background or explanatory details, true news sources strive to enhance understanding and clarity surrounding complex issues or events, fostering informed discourse and critical thinking among readers.
 
 
 
