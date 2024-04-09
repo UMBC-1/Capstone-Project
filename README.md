@@ -392,4 +392,135 @@ plt.show()
 ```
 ![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/371082d6-6eb5-4c6a-bf7c-e96e157f8f4e)
 
+# Model Development
+## N GRAM Analysis
+
+N-grams are a fundamental concept in the realm of text analysis, defined as contiguous sequences of n items extracted from a given sample of text or speech. These items can vary depending on the application and context, encompassing letters, words, or even base pairs in the case of genomic analysis. The utility of N-grams extends across various domains, with applications ranging from natural language processing to bioinformatics. In text analysis, N-grams serve as building blocks for tasks such as language modeling, sentiment analysis, and predictive text input. By capturing the sequential relationships between elements within a text, N-grams provide valuable insights into linguistic patterns and structures.
+
+For instance, in the context of language modeling, N-grams are utilized to estimate the probability of encountering a particular sequence of words within a given corpus. This probabilistic approach forms the basis for applications such as text prediction and autocorrection in mobile keyboards and search engines. Moreover, N-grams play a crucial role in the detection of plagiarism and authorship attribution by identifying similarities in textual patterns across documents. By analyzing the frequency and distribution of N-grams, researchers can assess the uniqueness and authenticity of written content, thereby aiding in the preservation of academic integrity and intellectual property rights. In summary, N-grams serve as versatile tools in text analysis, enabling the extraction of meaningful insights from textual data across diverse fields and applications. Through their ability to capture sequential relationships and patterns, N-grams empower researchers and practitioners to unravel the complexities of language and communication in both spoken and written forms.
+
+### Step-by-step Analysis
+```<python>
+from nltk.util import ngrams
+from collections import Counter
+
+def get_ngrams(corpus, ngram_range, top_n):
+    # Tokenize the corpus
+    tokenized_corpus = [word for sentence in corpus for word in sentence.split()]
+    # Generate n-grams
+    n_grams = ngrams(tokenized_corpus, ngram_range)
+    # Count the frequency of each n-gram
+    ngram_freq = Counter(n_grams)
+
+    # Get top n-grams
+    top_ngrams = ngram_freq.most_common(top_n)
+
+    return top_ngrams
+
+# Get top 5 bi-grams from fake news titles
+fake_news_bigrams = get_ngrams(fake_data['title'],2, 5)
+
+# Get top 5 bi-grams from true news titles
+true_news_bigrams = get_ngrams(real_data['title'],2, 5)
+
+# Create DataFrame
+bigrams_df = pd.DataFrame({
+    'Fake News Bi-Grams': [f"{bigram[0]} ({bigram[1]})" for bigram in fake_news_bigrams],
+    'True News Bi-Grams': [f"{bigram[0]} ({bigram[1]})" for bigram in true_news_bigrams]
+})
+
+bigrams_df
+```
+This code snippet analyzes bigrams (2-word phrases) in fake and real news article titles, identifying the most frequent ones. Here's a breakdown of what each part does:
+
+1. Importing Libraries:
+
+-from nltk.util import ngrams: This imports the ngrams function from the nltk.util module, which helps generate sequences of N words (N-grams) from a text corpus.
+*from collections import Counter: This imports the Counter class from the collections module, which is used to create a dictionary-like object that keeps track of how often each element appears in an iterable.
+
+2. get_ngrams Function:
+
+-def get_ngrams(corpus, ngram_range, top_n):: This defines a function named get_ngrams that takes three arguments:
+
+  -corpus: This is the text data you want to analyze, likely a list of sentences or titles in your case.
+  -ngram_range: This is a tuple specifying the range of N-gram lengths to consider (e.g., (2, 2) for bigrams).
+  -top_n: This is an integer representing the number of most frequent N-grams to return.
+-tokenized_corpus = [word for sentence in corpus for word in sentence.split()]: This line iterates through the corpus, tokenizes each sentence (splitting it into words), and creates a flat list named tokenized_corpus that contains all the individual words.
+
+-n_grams = ngrams(tokenized_corpus, ngram_range): This line uses the ngrams function from NLTK to generate N-grams within the specified range (ngram_range) from the tokenized text in tokenized_corpus. In this case, it will generate bigrams (2-word sequences).
+
+-ngram_freq = Counter(n_grams): This line uses the Counter class to create a dictionary-like object ngram_freq that keeps track of how many times each bigram appears in the corpus.
+
+-top_ngrams = ngram_freq.most_common(top_n): This line uses the most_common method of ngram_freq to get the top_n (e.g., top 5) most frequent bigrams and their counts. It returns a list of tuples, where each tuple contains a bigram and its frequency.
+
+-return top_ngrams: This line returns the list of top N-grams (top_ngrams).
+
+3. Analyzing Fake and Real News Titles:
+
+-fake_news_bigrams = get_ngrams(fake_data['title'], 2, 5): This line calls the get_ngrams function to find the top 5 most frequent bigrams from the titles in the 'title' column of the fake_data DataFrame.
+
+-true_news_bigrams = get_ngrams(real_data['title'], 2, 5): This line does the same for the titles in the 'title' column of the real_data DataFrame, identifying the top 5 most frequent bigrams in real news titles.
+
+4. Creating DataFrame:
+
+-This section creates a DataFrame named bigrams_df to present the results in a tabular format.
+  -The DataFrame has two columns:
+
+  -'Fake News Bi-Grams': This column lists the top 5 bigrams from fake news titles, formatted with each word and its frequency in parentheses (e.g., "breaking news (10)").
+    -'True News Bi-Grams': This column lists the top 5 bigrams from real news titles, formatted similarly.
+  -The values in each cell are created using list comprehension to iterate through the fake_news_bigrams and true_news_bigrams lists and format the bigrams with their counts.
+
+5. Displaying Results:
+
+-bigrams_df: This line displays the final DataFrame bigrams_df, which allows you to compare the most frequent bigrams used in fake and real news titles.
+
+Overall, this code helps you identify potential patterns in how language is used within fake and real news articles by analyzing the most frequent bigrams (2-word phrases) in their titles.
+
+Output:
+![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/219da0e9-86c6-4d65-b8bb-2c41213c8b80)
+
+Upon analyzing bi-grams in news titles, distinct patterns emerge between fake and true news datasets.
+
+In fake news titles, the most prevalent bi-gram is 'Donald Trump', appearing 547 times, indicating a notable emphasis on sensationalism or potential political bias. This frequent mention of the former president's name suggests a focus on generating attention or controversy within the fabricated news stories. Following closely behind is the bi-gram 'White House' with a frequency of 268, reinforcing the theme of political intrigue or manipulation within the fabricated narratives.
+
+Conversely, in titles of true news articles, 'White House' emerges as the dominant bi-gram, occurring a staggering 734 times. This prevalence underscores the significance of political coverage and governmental affairs within legitimate news sources. Additionally, 'North Korea' ranks as the second most frequent bi-gram with a frequency of 578, indicating a substantial focus on international relations and geopolitical developments in authentic news reporting.
+
+These findings highlight the divergent thematic focuses between fake and true news titles, with the former often prioritizing sensationalism and political intrigue, while the latter tends to emphasize genuine political events and international affairs. Such insights underscore the importance of discernment and critical analysis when consuming news media, particularly in discerning between fabricated narratives and factual reporting.
+
+```<python>
+fake_news_trigrams = get_ngrams(fake_data['title'], 3, 5)
+true_news_trigrams = get_ngrams(real_data['title'], 3, 5)
+
+trigrams_df = pd.DataFrame({
+    'Fake News Tri-Grams': [f"{trigram[0]} ({trigram[1]})" for trigram in fake_news_trigrams],
+    'True News Tri-Grams': [f"{trigram[0]} ({trigram[1]})" for trigram in true_news_trigrams]
+})
+
+trigrams_df
+```
+This code builds upon the previous analysis and focuses on trigrams, which are 3-word phrases, in your fake and real news article titles. Here's a breakdown of what it does:
+
+-Finding Top Trigrams:
+
+  -fake_news_trigrams = get_ngrams(fake_data['title'], 3, 5): This line calls the get_ngrams function you defined earlier. Here, it analyzes the titles in the 'title' column of fake_data, searching for the top 5 most frequent trigrams (3-word sequences).
+  -true_news_trigrams = get_ngrams(real_data['title'], 3, 5): This line does the same for the titles in real_data, identifying the top 5 most frequent trigrams used in real news titles.
+  
+-Creating Trigram DataFrame:
+
+-This section creates a DataFrame named trigrams_df to present the trigram analysis results:
+  -Similar to the bigram DataFrame, it has two columns:
+
+  -'Fake News Tri-Grams': This column lists the top 5 trigrams from fake news titles, formatted with each word and its frequency in parentheses (e.g., "breaking news event (8)").
+  -'True News Tri-Grams': This column lists the top 5 trigrams from real news titles, formatted similarly.
+The values are created using list comprehension to iterate through the fake_news_trigrams and true_news_trigrams lists and format the trigrams with their counts.
+
+-Displaying Results:
+
+  -trigrams_df: This line displays the final DataFrame trigrams_df, allowing you to compare the most frequent 3-word phrases used in the titles of fake and real news articles.
+
+By analyzing both bigrams (2-word phrases) and trigrams (3-word phrases), you can gain a deeper understanding of the characteristic language patterns used in different categories of news articles (fake vs. real). This can be helpful in developing algorithms for detecting fake news or understanding the stylistic choices used in these types of content.
+
+
+
+
 
