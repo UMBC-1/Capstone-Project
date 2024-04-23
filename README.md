@@ -96,21 +96,21 @@ Model Selection: Based on the evaluation metrics, pick the model with the nice o
  
 # New Developments
 
-In the realm of text analysis, the integration of natural language processing (NLP) techniques during pre-processing is crucial for extracting meaningful insights from textual data. Techniques such as tokenization, stop word removal, and lemmatization or stemming are commonly employed to prepare the text for analysis. However, to delve deeper into the semantic relationships between words, leveraging advanced methods like Word2Vec embedding proves invaluable.
+﻿In the realm of text analysis, the mixing of natural language processing (NLP) strategies during pre-processing is important for extracting significant insights from textual information. Techniques which includes tokenization, stop phrase removal, and lemmatization or stemming are normally hired to put together the textual content for analysis. However, to delve deeper into the semantic relationships among phrases, leveraging superior strategies like Word2Vec embedding proves valuable.
+ 
+﻿Word2Vec allows the transformation of phrases into dense vectors, taking pictures semantic similarities and nuances in which means. By representing phrases in a non-stop vector space, Word2Vec enables obligations together with word similarity and analogy, improving the depth of evaluation. Moreover, to deal with the computational challenges posed by massive datasets, parallel processing techniques can be hired. By dispensing the workload across a couple of processors or cores, parallel processing notably improves efficiency and reduces processing time.
 
-Word2Vec enables the transformation of words into dense vectors, capturing semantic similarities and nuances in meaning. By representing words in a continuous vector space, Word2Vec facilitates tasks such as word similarity and analogy, enhancing the depth of analysis. Moreover, to address the computational challenges posed by large datasets, parallel processing techniques can be employed. By distributing the workload across multiple processors or cores, parallel processing significantly improves efficiency and reduces processing time.
+In addition to leveraging sophisticated techniques, supplying a user-pleasant interface is critical for facilitating get admission to to the analysis tools. Streamlit, a powerful Python library, offers a convenient answer for developing interactive internet programs with minimum effort. By integrating Streamlit into the evaluation pipeline, users can effects have interaction with the records, visualize results, and explore insights in real-time.
 
-In addition to leveraging sophisticated techniques, providing a user-friendly interface is essential for facilitating access to the analysis tools. Streamlit, a powerful Python library, offers a convenient solution for creating interactive web applications with minimal effort. By integrating Streamlit into the analysis pipeline, users can effortlessly interact with the data, visualize results, and explore insights in real-time.
-
-In summary, the synergy between NLP techniques, Word2Vec embedding, parallel processing, and Streamlit interface not only enhances the efficiency of text analysis but also empowers users to uncover deeper insights from textual data with ease.
+In precis, the synergy among NLP strategies, Word2Vec embedding, parallel processing, and Streamlit interface not only complements the efficiency of textual content analysis however additionally empowers users to uncover deeper insights from textual records readily.
 
 # Data Preprocessing
 
-In the process of preparing our data for analysis, we began by merging two distinct datasets: one comprising real data and the other containing fake data. By consolidating these datasets, we aimed to create a comprehensive corpus that encompasses a diverse range of textual content.
+﻿In the process of preparing our facts for evaluation, we began through merging two distinct datasets: one comprising real data and the opposite containing fake facts. By consolidating those datasets, we aimed to create a complete corpus that encompasses a diverse range of textual content.
 
-Subsequently, we introduced a target variable to each dataset to facilitate classification tasks. Specifically, we assigned a value of 1 to instances originating from the real data, signifying their authenticity, while instances sourced from the fake data were labeled with a value of 0.
+Subsequently, we brought a goal variable to every dataset to facilitate type tasks. Specifically, we assigned a fee of 1 to times originating from the real records, signifying their authenticity, even as times sourced from the faux statistics had been labeled with a fee of zero.
 
-To ensure the integrity of our dataset and maintain data quality, we conducted thorough data cleaning procedures. This included identifying and addressing any null or missing values present within the combined dataset. By meticulously removing or imputing missing values, we fortified the robustness of our dataset, thereby enhancing the reliability and accuracy of subsequent analyses.
+To make certain the integrity of our dataset and hold information fine, we conducted thorough records cleansing strategies. This blanketed figuring out and addressing any null or missing values present inside the blended dataset. By meticulously doing away with or imputing missing values, we fortified the robustness of our dataset, thereby improving the reliability and accuracy of next analyses.
 
 # Step-by-step Code Analysis
 ## Importing Packages
@@ -204,7 +204,7 @@ plt.show()
 ```
 ![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/90d2aace-64a9-49f9-a918-02cc50d8c603)
 
-This bar graph depicts subject frequency, likely in a news article dataset. The x-axis lists subjects like "US News" and "Politics", with the y-axis showing their frequency (possibly number of articles). Red and white bars represent two categories (unclear from missing legend), with "US News" and "Politics" being the most frequent subjects overall.
+﻿This bar graph depicts concern frequency, probable in a news article dataset. The x-axis lists topics like "US News" and "Politics", with the y-axis showing their frequency (possibly range of articles). Red and white bars represent two categories (unclear from missing legend), with "US News" and "Politics" being the maximum common subjects universal.
 ```<python>
 plt.figure(figsize=(8, 6))
 df['category'].value_counts().plot(kind='pie', autopct='%1.1f%%')
