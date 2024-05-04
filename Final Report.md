@@ -33,45 +33,29 @@ The goal of this project is to establish a link between data and human understan
 These studies collectively contribute to advancing the field of fake news detection, offering insights into diverse methodologies and approaches aimed at mitigating the harmful effects of misinformation.
 
 # Dataset Overview
-﻿The dataset contains a set of news articles available on Kaggle, on hand via the subsequent link: Fake News Detection Dataset. It consists of predominant documents:
+The dataset is a collection of news articles available through the link [Fake News Detection Dataset](https://www.kaggle.com/code/therealsampat/fake-news-detection/input).
 
-### Fake.csv:
+  Number of files: 2 
+  Total size: 116.37 MB
 
-- File Size: 62.79MB
-- Number of Rows: 23,481
-- Number of Columns: 4
+**Document 1: Fake.csv**
 
-### True.csv:
+  Size: 62.79MB
+  
+  Number of rows: 23,481
+  
+  Number of columns: 4
 
-- File Size: 53.58MB
-- Number of Rows: 21,417
-- Number of Columns: 4
+**Document 2: True.csv**
 
-These documents contain a based dataset of information articles, labeled into fake and proper news. The information offers precious resources for researchers and practitioners interested in analyzing and growing techniques for fake information detection.
+  Size: 53.58MB
+  
+  Number of rows: 21,417
+  
+  Number of columns: 4
 
-Workflow of the Project
+# Data Overview
 
-# Workflow of the Project
-![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/4101cf1e-f123-4885-b275-b6d29b432b42)
-
-
-# New Developments
-﻿In the realm of text analysis, the mixing of natural language processing (NLP) strategies during pre-processing is important for extracting significant insights from textual information. Techniques which includes tokenization, stop phrase removal, and lemmatization or stemming are normally hired to put together the textual content for analysis. However, to delve deeper into the semantic relationships among phrases, leveraging superior strategies like Word2Vec embedding proves valuable.
-
-﻿Word2Vec allows the transformation of phrases into dense vectors, taking pictures semantic similarities and nuances in which means. By representing phrases in a non-stop vector space, Word2Vec enables obligations together with word similarity and analogy, improving the depth of evaluation. Moreover, to deal with the computational challenges posed by massive datasets, parallel processing techniques can be hired. By dispensing the workload across a couple of processors or cores, parallel processing notably improves efficiency and reduces processing time.
-
-In addition to leveraging sophisticated techniques, supplying a user-pleasant interface is critical for facilitating get admission to to the analysis tools. Streamlit, a powerful Python library, offers a convenient answer for developing interactive internet programs with minimum effort. By integrating Streamlit into the evaluation pipeline, users can effects have interaction with the records, visualize results, and explore insights in real-time.
-
-In precis, the synergy among NLP strategies, Word2Vec embedding, parallel processing, and Streamlit interface not only complements the efficiency of textual content analysis however additionally empowers users to uncover deeper insights from textual records readily.
-
-# Data Preprocessing
-﻿In the process of preparing our facts for evaluation, we began through merging two distinct datasets: one comprising real data and the opposite containing fake facts. By consolidating those datasets, we aimed to create a complete corpus that encompasses a diverse range of textual content.
-
-Subsequently, we brought a goal variable to every dataset to facilitate type tasks. Specifically, we assigned a fee of 1 to times originating from the real records, signifying their authenticity, even as times sourced from the faux statistics had been labeled with a fee of zero.
-
-To make certain the integrity of our dataset and hold information fine, we conducted thorough records cleansing strategies. This blanketed figuring out and addressing any null or missing values present inside the blended dataset. By meticulously doing away with or imputing missing values, we fortified the robustness of our dataset, thereby improving the reliability and accuracy of next analyses.
-
-# Understanding About Dataset
 fake_data.head()
 
 ![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/52a77b10-a4a8-4c7f-9654-2589ce98e188)
@@ -88,14 +72,54 @@ real_data.info()
 
 ![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/c8de7c6d-6efa-4e14-8655-7a5fa9637664)
 
-### Combined Data
+# Data Preprocessing
+
+## Concatenation of Datasets:
+The dataset is initially segregated into two CSV files: Fake.csv and Real.csv. The process involves merging them and introducing a target variable: assigning 0 to Fake News and 1 to True/Real News.
 ![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/0d23e9da-fc87-48f3-93a2-e4292a580e55)
 
-### Null Values
 
-![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/7758d3e0-303c-4c64-94d4-274b5d167926)
+## Checking for Null Values:
+Upon combining the dataset, it is confirmed that there are no null values present.
+![Image for Null Values Check](image_link_here)
 
-This concludes there are no null values.
+## Text Cleaning Process
+
+1. **Noise Removal:**
+   Stripped text of formatting, including HTML tags, special characters, and emojis, to focus solely on the textual content.
+
+2. **Lowercasing:**
+   Converted all text to lowercase to maintain consistency; for example, "Hello" and "hello" were treated as the same word for analysis.
+
+3. **Punctuation Removal:**
+   Discarded punctuation marks from the text, as they typically don't convey significant semantic meaning.
+
+4. **Stopwords Removal:**
+   Removed common words like "is", "and", "the", etc., known as stopwords, which often don't contribute much to the text's meaning.
+
+5. **Numbers Removal:**
+   Eliminated numerical values or converted them into textual representations, as they might not be relevant for the analysis.
+
+## Preprocessing Steps in NLP
+
+1. **Tokenization:**
+
+***Sentence Tokenization:*** Divided the text into individual sentences.
+
+***Word Tokenization:*** Split the text into individual words or tokens.
+
+2. **Stemming:**
+   Reduced words to their base form (e.g., "running" to "run").
+
+3. **Lemmatization:**
+    Mapped contextually linked words with similar meanings to a single word (e.g., "better" to "good").
+
+4. **Word2Vec Embeddings:**
+    Word2Vec maps words into a dense vector space, capturing semantic meanings based on their context in the corpus.
+    Converted sentences to their average word vector representations using a Word2Vec model.
+
+
+  
 
 # Exploratory Data Analysis
 ![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/69dc4600-b481-449b-bc5e-e1e8dd7a180b)
