@@ -208,7 +208,7 @@ It gives a feature extract_features that allows selecting between Bag-of-Words (
 It integrates the Word2Vec embeddings as extra features for the version. Each statistics point now has features extracted from both conventional textual content processing methods and the Word2Vec model, probably enriching the model's ability to learn from the facts.
 
 
-Overall, ﻿Prepares textual content records for machine learing knowledge of through cleansing, transforming it into functions, and incorporating word embeddings to probably enhance the model's performance in classifying fake and real news articles.
+Overall, ﻿Prepares textual content records for machine learing knowledge of through cleaning, transforming it into functions, and incorporating word embeddings to probably enhance the model's performance in classifying fake and real news articles.
 
 # Data Models
 We used different classification models to find out the best model and saved the model weights, here is breakdown process:
