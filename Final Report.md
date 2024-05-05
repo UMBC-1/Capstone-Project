@@ -56,30 +56,34 @@ The dataset is a collection of news articles available through the link [Fake Ne
 
 # Data Overview
 
+``` python
 fake_data.head()
-
-<p align="center">
-  <img width="460" height="300" src="[https://picsum.photos/460/300](https://github.com/UMBC-1/Capstone-Project/assets/57500152/52a77b10-a4a8-4c7f-9654-2589ce98e188)">
-</p>
+```
 
 ![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/52a77b10-a4a8-4c7f-9654-2589ce98e188)
 
+``` python
 fake_data.info()
+```
 
 ![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/d8374bca-86b1-4370-8011-76fd8286f86b)
 
+``` python
 real_data.head()
+```
 
 ![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/e930b673-f3b0-43d1-9cca-51e0ea7f230a)
 
+``` python
 real_data.info()
+```
 
 ![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/c8de7c6d-6efa-4e14-8655-7a5fa9637664)
 
 # Data Preprocessing
 
 ## Concatenation of Datasets:
-The dataset is initially segregated into two CSV files: Fake.csv and Real.csv. The process involves merging them and introducing a target variable: assigning 0 to Fake News and 1 to True/Real News.
+The dataset is initially segregated into two CSV files: **Fake.csv** and **Real.csv**. The process involves merging them and introducing a target variable: assigning 0 to Fake News and 1 to True/Real News.
 
 ![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/0d23e9da-fc87-48f3-93a2-e4292a580e55)
 
@@ -206,23 +210,23 @@ Here's a breakdown of the key functionalities:
 
 ## ﻿Text Preprocessing:
 
-* The **text_preprocess** function we used in code is to converts text to lowercase, eliminates punctuation and non-alphabetic characters, and applies stemming using PorterStemmer to lessen phrases to their root form. The parallel_preprocessing feature leverages a couple of CPU cores to efficiently cope with large datasets.
+* The **``text_preprocess()``** function we used in code is to converts text to lowercase, eliminates punctuation and non-alphabetic characters, and applies stemming using PorterStemmer to lessen phrases to their root form. The parallel_preprocessing feature leverages a couple of CPU cores to efficiently cope with large datasets.
 
 ## Word2Vec Embeddings: 
 
-- The **get_word2vec_embeddings** function used in code to train a Word2Vec model to learn these relationships based on how often words appear together in sentences. Another function, sentence_to_avg_vector, then converts entire sentences into a single vector representation by averaging the vectors of the individual words within the sentence.
+- The **``get_word2vec_embeddings()``** function used in code to train a Word2Vec model to learn these relationships based on how often words appear together in sentences. Another function, sentence_to_avg_vector, then converts entire sentences into a single vector representation by averaging the vectors of the individual words within the sentence.
 
 ## Data Splitting: 
 
-- The **split_data** function able to divide the data records into three subsets: training, validation, and testing. The training set is used to train the model, the validation set helps fine-tune the model's parameters, and the testing set provides an unbiased assessment of the model's performance.
+- The **``split_data()``** function able to divide the data records into three subsets: training, validation, and testing. The training set is used to train the model, the validation set helps fine-tune the model's parameters, and the testing set provides an unbiased assessment of the model's performance.
 
 ## Feature Extraction: 
 
-- The **extract_features** function, which we created, offers flexibility in text feature extraction. It allows users to choose between two common strategies: Bag-of-Words (bow) and TF-IDF. Both methods convert textual data into numerical features that machine learning algorithms can understand. By selecting the appropriate strategy, users can tailor their model to focus on word frequency (bow) or emphasize the importance of words based on their rarity within the corpus (TF-IDF).
+- The **``extract_features()``** function, which we created, offers flexibility in text feature extraction. It allows users to choose between two common strategies: Bag-of-Words (bow) and TF-IDF. Both methods convert textual data into numerical features that machine learning algorithms can understand. By selecting the appropriate strategy, users can tailor their model to focus on word frequency (bow) or emphasize the importance of words based on their rarity within the corpus (TF-IDF).
 
 ## Integration of Word2Vec Embeddings: 
 
-- The **extract_features** function is extended to include not only traditional text processing techniques but also the semantic relationships captured by the Word2Vec model. This combined approach enriches the data representation, potentially leading to a more informed and effective model.
+- The **``extract_features()``** function is extended to include not only traditional text processing techniques but also the semantic relationships captured by the Word2Vec model. This combined approach enriches the data representation, potentially leading to a more informed and effective model.
 
 Overall, ﻿Prepares textual content records for machine learing knowledge of through cleaning, transforming it into functions, and incorporating word embeddings to probably enhance the model's performance in classifying fake and real news articles.
 
