@@ -58,6 +58,10 @@ The dataset is a collection of news articles available through the link [Fake Ne
 
 fake_data.head()
 
+<p align="center">
+  <img width="460" height="300" src="[https://picsum.photos/460/300](https://github.com/UMBC-1/Capstone-Project/assets/57500152/52a77b10-a4a8-4c7f-9654-2589ce98e188)">
+</p>
+
 ![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/52a77b10-a4a8-4c7f-9654-2589ce98e188)
 
 fake_data.info()
