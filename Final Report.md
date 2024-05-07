@@ -134,40 +134,41 @@ Upon combining the dataset, it is confirmed that there are no null values presen
 
 ![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/69dc4600-b481-449b-bc5e-e1e8dd7a180b)
 
-﻿This **bar graph** depicts concern frequency, probable in a news article dataset. The x-axis lists topics like "US News" and "Politics", with the y-axis showing their frequency (possibly range of articles). Red and white bars represent two categories (unclear from missing legend), with "US News" and "Politics" being the maximum common subjects universal.
+T﻿his bar graph illustrates the distribution of subject frequencies within the dataset, highlighting "US News" and "Politics" as the most prevalent subjects. 
 
 ![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/4f8d88d2-066f-447f-b065-41eaa2c51fc5)
  
-This **pie chart** likely depicts the distribution of real and fake data in your dataset. With blue labeled as 52.3% and orange at 47.7%, the data seems fairly balanced between real and fake categories.
+The pie chart illustrates the distribution of real and fake data in the dataset, showcasing a fair balance between the two categories.
 
 ![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/361e535e-3318-42be-9d84-f4e026651781)
  
-This **time series plot** visualizes the distribution of fake (light pink) and real (light blue) news articles over time (months). The stacked area chart shows the cumulative number of articles in each category, with color intensity potentially indicating higher volumes of fake news articles compared to real news articles throughout the displayed timeframe.
+
+The above graph demonstrates the connection between article counts and their release dates. Notably, there is a significant increase in articles during May and June of 2016. Additionally, a spike in articles is observed towards late 2017.
 
 ![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/3abb395c-9289-440d-87aa-189f1e4aa320)
  
 **Distribution of Article Lengths by Category**
 
-## Text Processing
-Creating text data for further analysis by by converting it to lowercase, removing punctuation and digits, and potentially feeding it into a word cloud creation process to visualize frequently used words within the fake news content and real news content.
+## Word Cloud 
 
 ![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/7face6f4-b0a2-467d-b4d7-c8481c8efcbe)
 
-﻿A word cloud evaluation of fake information articles exhibits high frequency of politically charged phrases ("Trump", "Obama", and many others.) and negativity ("lie", "racist"). This shows a focal point on exploiting political divides and emotional manipulation in crafting fake news.
+From the word cloud, we can observe that the most commonly used words in fake news articles seem to be "said", "Donald Trump", "American", "people", "that", "according", "support", "action", "women”,  "Hillary Clinton".
 
 ![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/ccafd248-a823-4ce0-be58-24b4111a80dc)
 
-﻿A word cloud evaluation of real information articles exhibits high frequency of politically charged phrases ("donald turmp", "senate", "republicans"and many others.). This shows different zoners of information which involves foreign affairs, politics and more.
+From the word cloud, we can observe that the most commonly used words in real  news articles seem to be "said", "Donald Trump", "percent ", "people", "that", "united state ", "support", "action", "wednesday”,  "whitehouse" ,”government”.
 
 ![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/a7967b24-ea1e-499d-ab02-4db9ceb30a6b)
 
-The graph shows the distribution of word counts in real and fake text articles. Real text articles tend to have shorter word counts than fake text articles. This could be because fake news articles are trying to be more attention-grabbing or because they include more irrelevant information.
+From the  above visualization , it's evident that articles categorized as true tend to have a greater average word length compared to those categorized as fake. Typically, individuals fabricating information tend to employ numerous articles and prepositions. Conversely, individuals conveying truthful information often exhibit greater articulateness and conciseness in their language use . Therefore, the conclusion drawn from the visualization, indicating that true news articles have a shorter average word length, appears to be valid.
 
 ![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/d4c04660-f22f-4630-bccd-32636af232ba)
 
-The two graphs in the image compare the character count distribution of real and fake text. The blue graph shows real text tends to have shorter character counts, while the orange graph shows fake text has a wider distribution with more frequent longer character counts.
+The above graphs reveal that fake texts generally contain more characters and words per article, thereby supporting the hypothesis established by the preceding visualization.
 
 # Model Development
+
 ## N GRAM Analysis
 
 **N-grams** are a fundamental concept within the realm of textual content evaluation, described as contiguous sequences of n items extracted from a given pattern of textual content or speech. These objects can range depending at the application and context, encompassing letters, words, or maybe base pairs in the case of genomic analysis. The tool of **N-grams** extends throughout various domain names, with applications ranging from natural language processing to bioinformatics. In textual content analysis, **N-grams** function constructing blocks for tasks such as language modeling, sentiment evaluation, and predictive textual content input. By capturing the sequential relationships between elements within a textual content, N-grams provide precious insights into linguistic patterns and systems.
@@ -205,49 +206,36 @@ Upon analyzing **tri-gram** in news titles, distinct patterns emerge between fak
 
 * Conversely, tri-grams present in true news articles often incorporate phrases that offer context or factual information, as illustrated by 'Factbox: Trump on'. By providing readers with additional background or explanatory details, true news sources strive to enhance understanding and clarity surrounding complex issues or events, fostering informed discourse and critical thinking among readers.
 
-# Preparing Text for Machine Learning Task
-Here's a breakdown of the key functionalities:
 
-## ﻿Text Preprocessing:
+## Parallel Processing :
 
-* The **``text_preprocess()``** function we used in code is to converts text to lowercase, eliminates punctuation and non-alphabetic characters, and applies stemming using PorterStemmer to lessen phrases to their root form. The parallel_preprocessing feature leverages a couple of CPU cores to efficiently cope with large datasets.
+  Parallel processing is used to increase the computational speed of computer systems by performing multiple data-processing operations simultaneously. 
+  To expedite text preprocessing, the data is divided into smaller chunks.
+  Each chunk undergoes preprocessing tasks independently and simultaneously using multiple CPU cores.
+  This parallel processing significantly speeds up the overall preprocessing workflow, especially for large datasets.
 
 ## Word2Vec Embeddings: 
 
-- The **``get_word2vec_embeddings()``** function used in code to train a Word2Vec model to learn these relationships based on how often words appear together in sentences. Another function, sentence_to_avg_vector, then converts entire sentences into a single vector representation by averaging the vectors of the individual words within the sentence.
+Word2Vec is a widely used method in natural language processing (NLP) that allows words to be represented as vectors in a continuous vector space. Word2Vec is an effort to map words to high-dimensional vectors to capture the semantic relationships between words . Words with similar meanings should have similar vector representations, according to the main principle of Word2Vec .
 
-## Data Splitting: 
+## Average Word Vector Representation:
 
-- The **``split_data()``** function able to divide the data records into three subsets: training, validation, and testing. The training set is used to train the model, the validation set helps fine-tune the model's parameters, and the testing set provides an unbiased assessment of the model's performance.
+Average word vector representation is a method used in natural language processing to convert sentences or text sequences into fixed-length numerical vectors. This technique involves first representing each word in the sentence as a word embedding vector, where similar words are closer in vector space. These word embeddings are then averaged element-wise to create a single vector representation for the entire sentence, capturing its semantic meaning based on the meanings of its constituent words. This approach allows for the encoding of variable-length text inputs into a consistent format suitable for machine learning algorithms, facilitating tasks such as text classification, sentiment analysis, and document clustering.
+
+# Model Preparation
+
+
+Since this task involves classification, the chosen models are classifiers, including **Logistic Regression**, **Linear SVM**, **Random Forest**, **Decision Tree**, and **Gradient Boosting**. Google Colab served as the development environment due to its convenience in importing packages. For testing and validation, 20% and 10% of the dataset were utilized
 
 ## Feature Extraction: 
 
 - The **``extract_features()``** function, which we created, offers flexibility in text feature extraction. It allows users to choose between two common strategies: Bag-of-Words (bow) and TF-IDF. Both methods convert textual data into numerical features that machine learning algorithms can understand. By selecting the appropriate strategy, users can tailor their model to focus on word frequency (bow) or emphasize the importance of words based on their rarity within the corpus (TF-IDF).
 
-## Integration of Word2Vec Embeddings: 
+## Classifier Evaluation:
 
-- The **``extract_features()``** function is extended to include not only traditional text processing techniques but also the semantic relationships captured by the Word2Vec model. This combined approach enriches the data representation, potentially leading to a more informed and effective model.
+ Created a function  which evaluates the performance of multiple classifiers using word embeddings (Word2Vec) on a test dataset. It trains each classifier, makes predictions on the test dataset and calculates evaluation metrics and stores them in a dictionary. 
 
-Overall, ﻿Prepares textual content records for machine learing knowledge of through cleaning, transforming it into functions, and incorporating word embeddings to probably enhance the model's performance in classifying fake and real news articles.
-
-# Data Models
-We used different classification models to find out the best model and saved the model weights, here is breakdown process:
-
-## ﻿Importing Classifiers and Metrics:
-
-- In this project, we incorporated various machine learning classifiers (Logistic Regression, SVM, etc.) and evaluation metrics (F1 score, confusion matrix, ROC curve) to analyze model performance for the text classification task.
-
-## Classifiers Dictionary:
-
-- we created a dictionary named **classifiers** that shops different system mastering models with their default parameters.
-
-## Model Evaluation Loop:
-
-The loop iterates via every classifier within the classifiers dictionary:
- - Trains the model at the schooling statistics with Word2Vec features (xtrain_w2v, ytrain).
- - Makes predictions on the checking out information (xtest_w2v).
-
-## Calculates assessment metrics:
+##  Assessment metrics:
 
 1. F1 Score (harmonic mean of precision and recall)
 2. Confusion matrix (visualizes accurate and incorrect predictions)
@@ -256,19 +244,20 @@ The loop iterates via every classifier within the classifiers dictionary:
 
 ![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/a40494ee-119c-44dd-92dc-7c0d3cb5ea9f)
 
-## Results DataFrame:
-
-- This dataframe converts the **res** dictionary right into a pandas DataFrame (res_df) for better employer and visualization of the assessment results.
+ From the above output Logistic Regression, Linear SVM, and Random Forest classifiers exhibit strong overall performance, as evidenced by their high F1 scores exceeding 0.96. These classifiers demonstrate effective classification ability, with minimal misclassifications as indicated by their respective confusion matrices. While Decision Tree and Gradient Boosting classifiers show slightly lower F1 scores, around 0.92 and 0.95 respectively, they still demonstrate respectable performance, with slightly higher false positive rates. Overall, the results indicate that Logistic Regression, Linear SVM, and Random Forest classifiers perform exceptionally well in this classification task using Word2Vec embeddings, with Decision Tree and Gradient Boosting classifiers offering competitive performance.
 
 ## ROC Curve Visualization:
 
-The ROC curves plots for each version using their corresponding False Positive Rate (FPR), True Positive Rate (TPR), and AUC (Area Under the Curve) values, taking into consideration a visible assessment of version overall performance.
-
 ![image](https://github.com/UMBC-1/Capstone-Project/assets/57500152/e69fe8e9-83e5-4bf1-aad8-0cd1bfaf6a4f)
 
+The ROC curve is a graphical representation of the True Positive Rate (TPR) against the False Positive Rate (FPR) , we can see the the graph of Logistic regression , Linear svm and Random forest approaching the top-left corner of the plot, suggesting strong discriminative ability between positive and negative instances. 
 
-- ﻿The ROC curve suggests the overall performance of 4 models: Logistic Regression, Linear SVM, Random Forest, and Decision Tree (all the use of Word2Vec functions). The AUC rating for each version is listed subsequent to its name. For example, Logistic Regression (Word2Vec) has the best AUC (0.97), suggesting it excels at differentiating actual from fake news articles on this dataset in comparison to the opposite fashions.
-  
+The AUC represents the area under the ROC curve and summarizes the performance of the classifier across all possible threshold settings.
+
+AUC ranges from 0 to 1, where a higher value indicates better performance. 
+
+The AUC values for Logistic Regression, Linear SVM, and Random Forest are around 0.96, indicating their high True Positive Rate (TPR) and relatively low False Positive Rate (FPR).
+
 ## Hyperparameter Tuning for Logistic Regression:
 ﻿Hyperparameters are settings that manage the gaining knowledge of process of a device getting to know model and might substantially effect its overall performance.
 
@@ -283,11 +272,19 @@ The ROC curves plots for each version using their corresponding False Positive R
 
 Overall, this framework enables the evaluation and optimization of machine learning models for classifying fake and real news articles. It leverages Word2Vec embeddings to represent text data and then refines the chosen model (Logistic Regression) through hyperparameter tuning. This tuning process aims to improve the model's ability to distinguish between real and fake news.
 
+![Uploading image.png…]()
 
 
 
 
+# Deploying the Model Using Streamlit
 
+ Streamlit was employed to develop a web application, This includes a text input field and a submit button, enabling users to input text for analysis. Upon submission, the model processes it using pre-trained models and provides real-time predictions on whether the news is fake or real.This interactive functionality not only enhances user accessibility to the model but also offers immediate feedback on the authenticity of news content, demonstrating the practical utility of machine learning models in real-world scenarios.
+
+## Fake News 
+add image 
+## Real News
+add image 
 
 
 
