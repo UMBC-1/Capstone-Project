@@ -167,8 +167,6 @@ From the  above visualization , it's evident that articles categorized as true t
 
 The above graphs reveal that fake texts generally contain more characters and words per article, thereby supporting the hypothesis established by the preceding visualization.
 
-# Model Development
-
 ## N GRAM Analysis
 
 **N-grams** are a fundamental concept within the realm of textual content evaluation, described as contiguous sequences of n items extracted from a given pattern of textual content or speech. These objects can range depending at the application and context, encompassing letters, words, or maybe base pairs in the case of genomic analysis. The tool of **N-grams** extends throughout various domain names, with applications ranging from natural language processing to bioinformatics. In textual content analysis, **N-grams** function constructing blocks for tasks such as language modeling, sentiment evaluation, and predictive textual content input. By capturing the sequential relationships between elements within a textual content, N-grams provide precious insights into linguistic patterns and systems.
@@ -206,6 +204,8 @@ Upon analyzing **tri-gram** in news titles, distinct patterns emerge between fak
 
 * Conversely, tri-grams present in true news articles often incorporate phrases that offer context or factual information, as illustrated by 'Factbox: Trump on'. By providing readers with additional background or explanatory details, true news sources strive to enhance understanding and clarity surrounding complex issues or events, fostering informed discourse and critical thinking among readers.
 
+# Model Development 
+
 
 ## Parallel Processing :
 
@@ -224,12 +224,7 @@ Average word vector representation is a method used in natural language processi
 
 # Model Preparation
 
-
 Since this task involves classification, the chosen models are classifiers, including **Logistic Regression**, **Linear SVM**, **Random Forest**, **Decision Tree**, and **Gradient Boosting**. Google Colab served as the development environment due to its convenience in importing packages. For testing and validation, 20% and 10% of the dataset were utilized
-
-## Feature Extraction: 
-
-- The **``extract_features()``** function, which we created, offers flexibility in text feature extraction. It allows users to choose between two common strategies: Bag-of-Words (bow) and TF-IDF. Both methods convert textual data into numerical features that machine learning algorithms can understand. By selecting the appropriate strategy, users can tailor their model to focus on word frequency (bow) or emphasize the importance of words based on their rarity within the corpus (TF-IDF).
 
 ## Classifier Evaluation:
 
@@ -258,34 +253,30 @@ AUC ranges from 0 to 1, where a higher value indicates better performance.
 
 The AUC values for Logistic Regression, Linear SVM, and Random Forest are around 0.96, indicating their high True Positive Rate (TPR) and relatively low False Positive Rate (FPR).
 
-## Hyperparameter Tuning for Logistic Regression:
-﻿Hyperparameters are settings that manage the gaining knowledge of process of a device getting to know model and might substantially effect its overall performance.
-
-- Tuning Parameters: We outline a dictionary named **log_params** that contains the hyperparameters to be tuned for Logistic Regression. These parameters may encompass the regularization electricity (C) and the solver set of rules used for training.
-- Grid Search with Cross-Validation: We leverage **GridSearchCV**, a powerful tool for hyperparameter tuning. It explores a predefined grid of hyperparameter values and trains the model with each combination on a subset of the records the use of cross-validation. Cross-validation facilitates save you overfitting by way of comparing the model's overall performance on unseen statistics.
-- F1 Score Optimization: **GridSearchCV** goals to locate the combination of hyperparameters that maximizes the F1 score at the validation set. The F1 score is a balanced metric that considers each precision and recall.
-- Best Hyperparameter Selection: Once the quest is whole, **GridSearchCV** identifies the best hyperparameter configuration based totally on the F1 scores. This configuration is then revealed, supplying crucial insights into the best settings for the Logistic Regression version in this project.
-
-## Saving the Best Model:
-
-- Once the model is evaluated and tested the result weights of the Logistic Regression model (after hyperparameter tuning) are saved using joblib for further usage.
-
-Overall, this framework enables the evaluation and optimization of machine learning models for classifying fake and real news articles. It leverages Word2Vec embeddings to represent text data and then refines the chosen model (Logistic Regression) through hyperparameter tuning. This tuning process aims to improve the model's ability to distinguish between real and fake news.
-
-![Uploading image.png…]()
-
-
-
-
 # Deploying the Model Using Streamlit
 
- Streamlit was employed to develop a web application, This includes a text input field and a submit button, enabling users to input text for analysis. Upon submission, the model processes it using pre-trained models and provides real-time predictions on whether the news is fake or real.This interactive functionality not only enhances user accessibility to the model but also offers immediate feedback on the authenticity of news content, demonstrating the practical utility of machine learning models in real-world scenarios.
+ Streamlit was employed to develop a web application, This includes a text input field and a submit button, enabling users to input text for analysis. Upon submission, the model processes it using pre-trained models and provides real-time predictions on whether the news is fake or real. This interactive functionality not only enhances user accessibility to the model but also offers immediate feedback on the authenticity of news content, demonstrating the practical utility of machine learning models in real-world scenarios.
 
 ## Fake News 
 add image 
 ## Real News
 add image 
 
+# Limitations
+
+1. Relying solely on Word2Vec embeddings may limit the system's adaptability to evolving forms of fake news that differ significantly from the training data. This could lead to reduced performance in detecting novel deceptive tactics.
+
+2. The computational resources required for training and maintaining sophisticated models, especially at scale for real-world deployment, can be substantial and costly. This includes the need for robust infrastructure and significant financial investments to ensure efficient operation and scalability.
+
+3. Ensuring data quality and addressing biases in training data are essential for model fairness and generalizability. Failure to adequately address these concerns may result in biased predictions and undermine the model's effectiveness in diverse real-world scenarios.
+
+# Future Work
+
+1. Explore transformer-based models such as BERT and GPT to capture contextual information and improve the model's understanding of complex language patterns, potentially enhancing its accuracy in detecting subtle forms of fake news.
+
+2. Experiment with ensemble methods to combine multiple models (e.g., logistic regression, random forest) for enhanced predictive performance and model robustness against various types of deceptive content.
+
+3. Develop mechanisms for real-time monitoring and continuous model updates with new data to adapt to evolving fake news patterns and ensure model relevancy over time. This iterative approach contributes to the ongoing battle against misinformation in the digital landscape.
 
 
 
